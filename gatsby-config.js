@@ -1,10 +1,30 @@
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Antd Starter',
-    description: 'Kick off your next, great Gatsby project with this antd starter. This barebones starter ships with the main Gatsby configuration files you might need.',
+    description:
+      'Kick off your next, great Gatsby project with this antd starter. This barebones starter ships with the main Gatsby configuration files you might need.',
     author: '@cardiv',
   },
   plugins: [
+    {
+      resolve: 'gatsby-source-airtable',
+      options: {
+        apiKey: process.env.AIRTABLE_API_KEY,
+        tables: [
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: 'Demos',
+            tableView: 'Published',
+            tableLinks: ['features'],
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: 'Features',
+            tableView: 'Published',
+          },
+        ],
+      },
+    },
     {
       resolve: 'gatsby-plugin-less',
       options: {
