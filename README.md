@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+    <img alt="Gatsby" src="./src/images/sift-sales.png" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby's antd starter
+  Sift Demos
 </h1>
 
 Kick off your project with this antd boilerplate ([live demo](https://stoic-swirles-4bd808.netlify.com/)). This barebones starter ships with the main Gatsby configuration files you might need + the [Antd component library](https://ant.design/).
