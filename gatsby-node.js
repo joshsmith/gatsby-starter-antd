@@ -15,6 +15,9 @@ exports.createPages = ({ graphql, actions }) => {
               table
               data {
                 customer
+                favicon {
+                  url
+                }
                 features {
                   data {
                     name
@@ -30,7 +33,9 @@ exports.createPages = ({ graphql, actions }) => {
                 page2
                 page3
                 primaryColor
+                publishableKey
                 slug
+                uppercase
               }
             }
           }
@@ -39,9 +44,9 @@ exports.createPages = ({ graphql, actions }) => {
     `)
     // For each path, create a page and decide which template to use.
     // values inside the context Object are available in the page's query
-    console.log(result);
     result.data.allAirtable.edges.forEach(({ node }) => {
-      if (node.table !== 'Demos') return;
+      if (node.table !== 'Demos') return
+
       createPage({
         path: node.data.slug,
         component: path.resolve(`./src/templates/blog-post.js`),

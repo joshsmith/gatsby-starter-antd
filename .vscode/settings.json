@@ -1,0 +1,14 @@
+{
+  "[html]": {
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "editor.tabSize": 2,
+  "eslint.packageManager": "yarn",
+  "eslint.workingDirectories": ["."],
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.provideLintTask": true,
+}
