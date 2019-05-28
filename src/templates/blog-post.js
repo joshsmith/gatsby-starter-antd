@@ -89,7 +89,7 @@ const Template = ({ data }) => {
   const [{ url: logoUrl }] = logo
   const faviconUrl = favicon && favicon.length > 0 && favicon[0].url
 
-  const onChange = checked => {
+  const onSwitchChange = checked => {
     if (checked) {
       setUser(defaultUser)
       const { id, ...traits } = defaultUser
@@ -99,6 +99,10 @@ const Template = ({ data }) => {
     } else {
       setUser(null)
     }
+  }
+
+  const handleTrack = event => {
+    Sift && Sift.track(event)
   }
 
   return (
@@ -158,7 +162,7 @@ const Template = ({ data }) => {
                 <Switch
                   checkedChildren={<Icon type="user" />}
                   unCheckedChildren={<Icon type="question" />}
-                  onChange={onChange}
+                  onChange={onSwitchChange}
                 />
               </li>
             </Menu>
@@ -197,7 +201,7 @@ const Template = ({ data }) => {
                     <StyledButton
                       color={primaryColor}
                       type="primary"
-                      onClick={() => Sift.track(event)}
+                      onClick={() => handleTrack(event)}
                     >
                       {buttonText}
                     </StyledButton>
