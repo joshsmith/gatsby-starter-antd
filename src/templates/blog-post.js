@@ -182,7 +182,7 @@ const Template = ({ data }) => {
                     verticalAlign: 'sub',
                   }}
                 />
-                Get feedback on your features with Sift.
+                Get feedback on {customer}'s features with Sift.
               </h2>
             </div>
           </Col>
