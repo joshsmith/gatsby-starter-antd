@@ -14,7 +14,6 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               table
               data {
-                actionTaken
                 customer
                 favicon {
                   url
@@ -22,6 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
                 features {
                   data {
                     name
+                    actionTaken
                     buttonText
                     event
                   }

@@ -69,7 +69,6 @@ const Template = ({ data }) => {
   const {
     airtable: {
       data: {
-        actionTaken,
         customer,
         favicon,
         features,
@@ -171,48 +170,65 @@ const Template = ({ data }) => {
         <Row gutter={16}>
           <Col span={24}>
             <Skeleton paragraph={{ rows: 3 }} />
+            <div style={{ margin: '2em 0', textAlign: 'center' }}>
+              <h2>
+                <Icon
+                  type="smile"
+                  theme="twoTone"
+                  twoToneColor={primaryColor}
+                  style={{
+                    fontSize: '1.25em',
+                    marginRight: 10,
+                    verticalAlign: 'sub',
+                  }}
+                />
+                Get feedback on your features with Sift.
+              </h2>
+            </div>
           </Col>
           {features &&
-            features.map(({ data: { buttonText, event, name } }, index) => [
-              <Col key={index} span={8}>
-                <Card
-                  title={
-                    <span style={{ whiteSpace: 'normal' }}>
-                      <span>
-                        <Icon
-                          type="build"
-                          theme="twoTone"
-                          twoToneColor={primaryColor}
-                          style={{ fontSize: '1.25em', marginRight: 10 }}
-                        />
+            features.map(
+              ({ data: { actionTaken, buttonText, event, name } }, index) => [
+                <Col key={index} span={8}>
+                  <Card
+                    title={
+                      <span style={{ whiteSpace: 'normal' }}>
+                        <span>
+                          <Icon
+                            type="build"
+                            theme="twoTone"
+                            twoToneColor={primaryColor}
+                            style={{ fontSize: '1.25em', marginRight: 10 }}
+                          />
+                        </span>
+                        <span>{name}</span>
                       </span>
-                      <span>{name}</span>
-                    </span>
-                  }
-                >
-                  <p>
-                    {`${copy[index]} `}
-                    <span style={{ textTransform: 'lowercase' }}>
-                      {actionTaken}
-                    </span>
-                    .
-                  </p>
-                  <p>
-                    <StyledButton
-                      color={primaryColor}
-                      type="primary"
-                      onClick={() => handleTrack(event)}
-                    >
-                      {buttonText}
-                    </StyledButton>
-                  </p>
-                  <p>
-                    Click to send Sift the event <Text code>{event}</Text>
-                  </p>
-                </Card>
-                <Skeleton paragraph={{ rows: 4 }} />
-              </Col>,
-            ])}
+                    }
+                  >
+                    <p>
+                      {`${copy[index]} `}
+                      <span style={{ textTransform: 'lowercase' }}>
+                        {actionTaken}
+                      </span>
+                      .
+                    </p>
+                    <p>
+                      <StyledButton
+                        color={primaryColor}
+                        type="primary"
+                        onClick={() => handleTrack(event)}
+                      >
+                        {buttonText}
+                      </StyledButton>
+                    </p>
+                    <p>
+                      Click to send Sift the event <Text code>{event}</Text>
+                    </p>
+                  </Card>
+                  <Skeleton paragraph={{ rows: 4 }} />
+                </Col>,
+              ]
+            )}
         </Row>
       </Content>
     </Layout>
@@ -223,7 +239,6 @@ export const pageQuery = graphql`
   query BlogPostByPath($slug: String!) {
     airtable(data: { slug: { eq: $slug } }) {
       data {
-        actionTaken
         customer
         favicon {
           url
@@ -231,6 +246,7 @@ export const pageQuery = graphql`
         features {
           data {
             name
+            actionTaken
             buttonText
             event
           }
