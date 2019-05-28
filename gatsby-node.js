@@ -14,6 +14,7 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               table
               data {
+                actionTaken
                 customer
                 favicon {
                   url
@@ -46,6 +47,7 @@ exports.createPages = ({ graphql, actions }) => {
     // values inside the context Object are available in the page's query
     result.data.allAirtable.edges.forEach(({ node }) => {
       if (node.table !== 'Demos') return
+      if (!node.data.slug) return
 
       createPage({
         path: node.data.slug,

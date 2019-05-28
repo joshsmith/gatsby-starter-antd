@@ -59,10 +59,17 @@ const defaultUser = {
   email: 'josh@hellosift.com',
 }
 
+const copy = [
+  'With Sift, you can ask for feedback when your users',
+  'You can also get get their opinion when they',
+  'And ask how happy they are whenever they',
+]
+
 const Template = ({ data }) => {
   const {
     airtable: {
       data: {
+        actionTaken,
         customer,
         favicon,
         features,
@@ -115,7 +122,7 @@ const Template = ({ data }) => {
             style={{ display: 'flex', alignItems: 'center', height: '70px' }}
           >
             <Link to={`/${slug}`}>
-              <img height={logoHeight || 70} src={logoUrl} alt={customer} />
+              <img height={logoHeight || '60'} src={logoUrl} alt={customer} />
             </Link>
           </Col>
           <Col
@@ -180,9 +187,9 @@ const Template = ({ data }) => {
                   }
                 >
                   <p>
-                    Ask for feedback when your users{' '}
+                    {`${copy[index]} `}
                     <span style={{ textTransform: 'lowercase' }}>
-                      {buttonText}
+                      {actionTaken}
                     </span>
                     .
                   </p>
@@ -212,6 +219,7 @@ export const pageQuery = graphql`
   query BlogPostByPath($slug: String!) {
     airtable(data: { slug: { eq: $slug } }) {
       data {
+        actionTaken
         customer
         favicon {
           url
