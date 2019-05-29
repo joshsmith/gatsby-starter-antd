@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "name": "Josh Smith",
+    "src": "../images/users/josh.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Danielle Morrill",
+    "src": "../images/users/danielle.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Jordan Gal",
+    "src": "../images/users/jordan.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Ben Orenstein",
+    "src": "../images/users/ben.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Joanna Wiebe",
+    "src": "../images/users/joanna.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Nathan Barry",
+    "src": "../images/users/nathan.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Justin Jackson",
+    "src": "../images/users/justin.jpg"
+  }
+]

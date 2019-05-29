@@ -69,5 +69,20 @@ module.exports = {
         },
       },
     },
+    'gatsby-transformer-json',
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `user-images`,
+        path: `${__dirname}/src/images/users`,
+      },
+    },
   ],
 }

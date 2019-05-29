@@ -48,8 +48,20 @@ const IndexPage = ({ data }) => (
                   return null
                 }
 
+                const favicon = edge.node.data.favicon
+                const faviconUrl =
+                  favicon && favicon.length > 0 && favicon[0].url
+
                 return (
                   <Option key={i} value={edge.node.data.slug}>
+                    {faviconUrl && (
+                      <img
+                        src={faviconUrl}
+                        width="16"
+                        height="16"
+                        style={{ marginRight: '5px', verticalAlign: 'sub' }}
+                      />
+                    )}
                     {edge.node.data.customer}
                   </Option>
                 )

@@ -2,9 +2,11 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import { Avatar, Col, Icon, Row, Switch } from 'antd'
+import { Col, Icon, Row, Switch } from 'antd'
 import styled from '@emotion/styled'
+import { darken } from 'polished'
 import StyledButton from './StyledButton'
+import UserSelect from './UserSelect'
 
 const Menu = styled.ul`
   align-items: center;
@@ -22,37 +24,17 @@ const MenuItem = styled.li`
   text-transform: ${props => (props.uppercase ? 'uppercase' : 'capitalize')};
 `
 
-const defaultUser = {
-  id: 1,
-  name: 'Josh Smith',
-  email: 'josh@hellosift.com',
-}
-
 const Header = ({
   customer,
   logo,
   logoHeight,
-  page1,
-  page2,
-  page3,
+  pages,
   primaryColor,
   slug,
   uppercase,
 }) => {
-  const [user, setUser] = useState(null)
+  const [userSelectVisible, setUserSelectVisible] = useState(false)
   const [{ url: logoUrl }] = logo
-
-  const onSwitchChange = checked => {
-    if (checked) {
-      setUser(defaultUser)
-      const { id, ...traits } = defaultUser
-      if (Sift) {
-        Sift.identify(`${id}`, traits)
-      }
-    } else {
-      setUser(null)
-    }
-  }
 
   return (
     <Row>
@@ -76,13 +58,21 @@ const Header = ({
         }}
       >
         <Menu>
-          <MenuItem uppercase={uppercase}>{page1}</MenuItem>
-          <MenuItem uppercase={uppercase}>{page2}</MenuItem>
-          <MenuItem uppercase={uppercase}>{page3}</MenuItem>
-          {user ? (
+          {pages &&
+            pages.map(page => [
+              <MenuItem key={page} uppercase={uppercase}>
+                <Link
+                  to={`/${slug}/${page}`}
+                  style={{ color: primaryColor }}
+                  activeStyle={{ color: darken(0.1, primaryColor) }}
+                >
+                  {page}
+                </Link>
+              </MenuItem>,
+            ])}
+          {userSelectVisible ? (
             <li>
-              <Avatar style={{ backgroundColor: primaryColor }} icon="user" />{' '}
-              {user.name}
+              <UserSelect primaryColor={primaryColor} />
             </li>
           ) : (
             <li>
@@ -95,7 +85,7 @@ const Header = ({
             <Switch
               checkedChildren={<Icon type="user" />}
               unCheckedChildren={<Icon type="question" />}
-              onChange={onSwitchChange}
+              onChange={() => setUserSelectVisible(!userSelectVisible)}
             />
           </li>
         </Menu>

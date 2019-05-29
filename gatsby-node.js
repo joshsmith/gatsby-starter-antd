@@ -33,6 +33,7 @@ exports.createPages = ({ graphql, actions }) => {
                 page1
                 page2
                 page3
+                pages
                 primaryColor
                 publishableKey
                 slug
@@ -48,14 +49,27 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allAirtable.edges.forEach(({ node }) => {
       if (node.table !== 'Demos') return
       if (!node.data.slug) return
+      const { slug } = node.data
 
       createPage({
-        path: node.data.slug,
+        path: slug,
         component: path.resolve(`./src/templates/blog-post.js`),
         context: {
-          slug: node.data.slug,
+          slug,
         },
       })
+
+      if (node.data.pages) {
+        node.data.pages.forEach(page => {
+          createPage({
+            path: `${slug}/${page}`,
+            component: path.resolve(`./src/templates/blog-post.js`),
+            context: {
+              slug,
+            },
+          })
+        })
+      }
     })
     resolve()
   })

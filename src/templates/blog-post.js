@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import {
+  message,
   Badge,
   Button,
   Card,
@@ -11,15 +12,14 @@ import {
   Layout,
   Row,
   Skeleton,
-  Typography,
 } from 'antd'
 import Helmet from 'react-helmet'
 import Favicon from 'react-favicon'
 import Header from '../components/Header'
 import StyledButton from '../components/StyledButton'
+import Code from '../components/Code'
 
 const { Content } = Layout
-const { Text } = Typography
 
 const copy = [
   'With Sift, you can ask for feedback when your users',
@@ -36,9 +36,7 @@ const Template = ({ data }) => {
         features,
         logo,
         logoHeight,
-        page1,
-        page2,
-        page3,
+        pages,
         primaryColor,
         publishableKey,
         slug,
@@ -56,6 +54,11 @@ const Template = ({ data }) => {
 
   const handleTrack = event => {
     Sift && Sift.track(event)
+    message.success(
+      <span>
+        Called <Code color={primaryColor}>Sift.track('{event}')</Code>
+      </span>
+    )
   }
 
   return (
@@ -76,9 +79,7 @@ const Template = ({ data }) => {
           customer={customer}
           logo={logo}
           logoHeight={logoHeight}
-          page1={page1}
-          page2={page2}
-          page3={page3}
+          pages={pages}
           primaryColor={primaryColor}
           slug={slug}
           uppercase={uppercase}
@@ -138,7 +139,8 @@ const Template = ({ data }) => {
                       </StyledButton>
                     </p>
                     <p>
-                      Click to send Sift the event <Text code>{event}</Text>
+                      Click to send Sift the event{' '}
+                      <Code color={primaryColor}>{event}</Code>
                     </p>
                   </Card>
                   <Skeleton paragraph={{ rows: 4 }} />
@@ -198,9 +200,7 @@ export const pageQuery = graphql`
           url
         }
         logoHeight
-        page1
-        page2
-        page3
+        pages
         primaryColor
         publishableKey
         slug
