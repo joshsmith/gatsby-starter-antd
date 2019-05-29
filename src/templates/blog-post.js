@@ -19,8 +19,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core'
 import Layout from '../components/layout'
 import Header from '../components/header'
-import StyledButton from '../components/styled-button'
-import Code from '../components/code'
+import StyledButton from '../components/StyledButton'
+import Code from '../components/Code'
 
 const { Content } = AntLayout
 

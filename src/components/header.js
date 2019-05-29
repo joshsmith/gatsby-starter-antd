@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Col, Icon, Row, Switch } from 'antd'
 import styled from '@emotion/styled'
 import { darken } from 'polished'
-import UserSelect from './user-select'
+import UserSelect from './UserSelect'
 
 const Menu = styled.ul`
   align-items: center;
