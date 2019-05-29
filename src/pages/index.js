@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { navigate } from 'gatsby'
-import Layout from '../components/Layout'
+import Layout from '../components/layout'
 import { Col, Layout as AntLayout, Row, Select } from 'antd'
 import Helmet from 'react-helmet'
 import Icon from '../images/sift-demos.svg'
