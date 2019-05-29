@@ -1,63 +1,25 @@
 /* eslint-disable no-undef, react/prop-types, react/no-danger */
 import React, { useState } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import {
-  Avatar,
+  Badge,
   Button,
   Card,
   Col,
+  Drawer,
   Icon,
   Layout,
   Row,
   Skeleton,
-  Switch,
   Typography,
 } from 'antd'
-import styled from '@emotion/styled'
-import { darken, lighten } from 'polished'
 import Helmet from 'react-helmet'
 import Favicon from 'react-favicon'
+import Header from '../components/Header'
+import StyledButton from '../components/StyledButton'
 
 const { Content } = Layout
 const { Text } = Typography
-
-const StyledButton = styled(Button)`
-  background-color: ${props => props.color};
-  border-color: ${props => props.color};
-
-  &:hover,
-  &:focus {
-    background-color: ${props => lighten(0.1, props.color)};
-    border-color: ${props => lighten(0.1, props.color)};
-  }
-
-  &:active {
-    background-color: ${props => darken(0.1, props.color)};
-    border-color: ${props => darken(0.1, props.color)};
-  }
-`
-
-const Menu = styled.ul`
-  align-items: center;
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-
-  li {
-    margin-left: 2em;
-  }
-`
-
-const MenuItem = styled.li`
-  font-weight: 500;
-  text-transform: ${props => (props.uppercase ? 'uppercase' : 'capitalize')};
-`
-
-const defaultUser = {
-  id: 1,
-  name: 'Josh Smith',
-  email: 'josh@hellosift.com',
-}
 
 const copy = [
   'With Sift, you can ask for feedback when your users',
@@ -84,21 +46,13 @@ const Template = ({ data }) => {
       },
     },
   } = data
-  const [user, setUser] = useState(null)
-  const [{ url: logoUrl }] = logo
   const faviconUrl = favicon && favicon.length > 0 && favicon[0].url
 
-  const onSwitchChange = checked => {
-    if (checked) {
-      setUser(defaultUser)
-      const { id, ...traits } = defaultUser
-      if (Sift) {
-        Sift.identify(`${id}`, traits)
-      }
-    } else {
-      setUser(null)
-    }
-  }
+  let issues = []
+  if (!publishableKey)
+    issues.push({ message: 'The publishable key was not set on Airtable.' })
+
+  const [drawerVisible, setDrawerVisible] = useState(null)
 
   const handleTrack = event => {
     Sift && Sift.track(event)
@@ -118,55 +72,17 @@ const Template = ({ data }) => {
       </Helmet>
       {faviconUrl && <Favicon url={[faviconUrl]} />}
       <Content style={{ padding: '0 50px' }}>
-        <Row>
-          <Col
-            sm={24}
-            md={12}
-            style={{ display: 'flex', alignItems: 'center', height: '70px' }}
-          >
-            <Link to={`/${slug}`}>
-              <img height={logoHeight || '60'} src={logoUrl} alt={customer} />
-            </Link>
-          </Col>
-          <Col
-            sm={24}
-            md={12}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              height: '70px',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Menu>
-              <MenuItem uppercase={uppercase}>{page1}</MenuItem>
-              <MenuItem uppercase={uppercase}>{page2}</MenuItem>
-              <MenuItem uppercase={uppercase}>{page3}</MenuItem>
-              {user ? (
-                <li>
-                  <Avatar
-                    style={{ backgroundColor: primaryColor }}
-                    icon="user"
-                  />{' '}
-                  {user.name}
-                </li>
-              ) : (
-                <li>
-                  <StyledButton color={primaryColor} type="primary">
-                    <Link to={`/${slug}`}>Sign up for {customer}</Link>
-                  </StyledButton>
-                </li>
-              )}
-              <li>
-                <Switch
-                  checkedChildren={<Icon type="user" />}
-                  unCheckedChildren={<Icon type="question" />}
-                  onChange={onSwitchChange}
-                />
-              </li>
-            </Menu>
-          </Col>
-        </Row>
+        <Header
+          customer={customer}
+          logo={logo}
+          logoHeight={logoHeight}
+          page1={page1}
+          page2={page2}
+          page3={page3}
+          primaryColor={primaryColor}
+          slug={slug}
+          uppercase={uppercase}
+        />
         <Row gutter={16}>
           <Col span={24}>
             <Skeleton paragraph={{ rows: 3 }} />
@@ -229,6 +145,33 @@ const Template = ({ data }) => {
                 </Col>,
               ]
             )}
+        </Row>
+        <Row>
+          <Col span={24} style={{ textAlign: 'right' }}>
+            <Badge count={issues.length}>
+              <Button onClick={() => setDrawerVisible(!drawerVisible)}>
+                <Icon type="code" />
+              </Button>
+            </Badge>
+            <Drawer
+              title={
+                <span>
+                  <Icon type="code" /> Debugger
+                </span>
+              }
+              placement="right"
+              closable={false}
+              onClose={() => setDrawerVisible(false)}
+              visible={drawerVisible}
+            >
+              <ol>
+                {issues &&
+                  issues.map(({ message }, index) => [
+                    <li key={index}>{message}</li>,
+                  ])}
+              </ol>
+            </Drawer>
+          </Col>
         </Row>
       </Content>
     </Layout>

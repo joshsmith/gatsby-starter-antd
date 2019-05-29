@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Antd Starter',
-    description:
-      'Kick off your next, great Gatsby project with this antd starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@cardiv',
+    title: 'Sift Demos',
+    description: 'Automated demo sites for Sift customers, backed by Airtable.',
+    author: '@joshsmith',
   },
   plugins: [
     {
@@ -62,5 +61,13 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /images/,
+        },
+      },
+    },
   ],
 }
