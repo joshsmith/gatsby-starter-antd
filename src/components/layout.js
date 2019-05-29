@@ -1,6 +1,5 @@
 import React from 'react'
 import { Layout as AntLayout } from 'antd'
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCommentAltSmile } from '@fortawesome/pro-solid-svg-icons'
 import {
@@ -57,7 +56,10 @@ library.add(
 )
 
 export default ({ children }) => (
-  <AntLayout className="layout" style={{ background: '#fff' }}>
+  <AntLayout
+    className="layout"
+    style={{ background: '#fff', display: 'flex', height: '100vh' }}
+  >
     {children}
   </AntLayout>
 )

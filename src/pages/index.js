@@ -1,18 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { navigate } from 'gatsby'
-import { Col, Layout, Row, Select } from 'antd'
+import Layout from '../components/Layout'
+import { Col, Layout as AntLayout, Row, Select } from 'antd'
 import Helmet from 'react-helmet'
 import Icon from '../images/sift-demos.svg'
 
-const { Content } = Layout
+const { Content } = AntLayout
 const { Option } = Select
 
 const IndexPage = ({ data }) => (
-  <Layout
-    className="layout"
-    style={{ background: '#fff', display: 'flex', height: '100vh' }}
-  >
+  <Layout>
     <Helmet>
       <title>Sift Demos</title>
     </Helmet>
