@@ -2,7 +2,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { message, Avatar, Select } from 'antd'
-import Code from './Code'
+import Code from './code'
 
 const { Option } = Select
 
