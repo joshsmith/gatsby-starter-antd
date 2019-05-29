@@ -45,7 +45,12 @@ const UserSelect = ({ primaryColor }) => (
           } = edge
 
           // Set the traits
-          const traits = { name, avatar: src.childImageSharp.fluid.src }
+          const traits = {
+            name,
+            avatar: `https://sift-demos.netlify.com${
+              src.childImageSharp.fluid.src
+            }`,
+          }
 
           if (Sift) {
             // Identify the user if we can
