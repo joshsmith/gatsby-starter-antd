@@ -8,24 +8,33 @@ import {
   Card,
   Col,
   Drawer,
+  Layout as AntLayout,
   Icon,
-  Layout,
   Row,
   Skeleton,
 } from 'antd'
 import Helmet from 'react-helmet'
 import Favicon from 'react-favicon'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { findIconDefinition } from '@fortawesome/fontawesome-svg-core'
+import Layout from '../components/layout'
 import Header from '../components/Header'
 import StyledButton from '../components/StyledButton'
 import Code from '../components/Code'
 
-const { Content } = Layout
+const { Content } = AntLayout
 
 const copy = [
   'With Sift, you can ask for feedback when your users',
-  'You can also get get their opinion when they',
+  'You can also get their thoughts when they',
   'And ask how happy they are whenever they',
 ]
+
+const getIcon = (icon, iconType) => {
+  const iconName = icon ? icon : 'bolt'
+  const prefix = iconType ? iconType : 'far'
+  return findIconDefinition({ prefix, iconName })
+}
 
 const Template = ({ data }) => {
   const {
@@ -62,7 +71,7 @@ const Template = ({ data }) => {
   }
 
   return (
-    <Layout className="layout" style={{ background: '#fff' }}>
+    <Layout>
       <Helmet>
         <title>Sift Demo for {customer}</title>
         <script>
@@ -89,14 +98,13 @@ const Template = ({ data }) => {
             <Skeleton paragraph={{ rows: 3 }} />
             <div style={{ margin: '2em 0', textAlign: 'center' }}>
               <h2>
-                <Icon
-                  type="smile"
-                  theme="twoTone"
-                  twoToneColor={primaryColor}
+                <FontAwesomeIcon
+                  icon={{ prefix: 'fas', iconName: 'comment-alt-smile' }}
                   style={{
+                    color: primaryColor,
                     fontSize: '1.25em',
-                    marginRight: 10,
-                    verticalAlign: 'sub',
+                    marginRight: 7,
+                    verticalAlign: 'middle',
                   }}
                 />
                 Get feedback on {customer}'s features with Sift.
@@ -105,17 +113,33 @@ const Template = ({ data }) => {
           </Col>
           {features &&
             features.map(
-              ({ data: { actionTaken, buttonText, event, name } }, index) => [
+              (
+                {
+                  data: {
+                    actionTaken,
+                    buttonText,
+                    event,
+                    icon,
+                    iconColor,
+                    iconType,
+                    name,
+                  },
+                },
+                index
+              ) => [
                 <Col key={index} span={8}>
                   <Card
                     title={
                       <span style={{ whiteSpace: 'normal' }}>
                         <span>
-                          <Icon
-                            type="build"
-                            theme="twoTone"
-                            twoToneColor={primaryColor}
-                            style={{ fontSize: '1.25em', marginRight: 10 }}
+                          <FontAwesomeIcon
+                            icon={getIcon(icon, iconType)}
+                            style={{
+                              color: iconColor || primaryColor,
+                              fontSize: '1.4em',
+                              marginRight: 10,
+                              verticalAlign: 'sub',
+                            }}
                           />
                         </span>
                         <span>{name}</span>
@@ -124,10 +148,7 @@ const Template = ({ data }) => {
                   >
                     <p>
                       {`${copy[index]} `}
-                      <span style={{ textTransform: 'lowercase' }}>
-                        {actionTaken}
-                      </span>
-                      .
+                      <span>{actionTaken}</span>.
                     </p>
                     <p>
                       <StyledButton
@@ -139,8 +160,8 @@ const Template = ({ data }) => {
                       </StyledButton>
                     </p>
                     <p>
-                      Click to send Sift the event{' '}
-                      <Code color={primaryColor}>{event}</Code>
+                      Click to send <Code color={primaryColor}>{event}</Code> to
+                      Sift
                     </p>
                   </Card>
                   <Skeleton paragraph={{ rows: 4 }} />
@@ -190,10 +211,12 @@ export const pageQuery = graphql`
         }
         features {
           data {
-            name
             actionTaken
             buttonText
             event
+            iconType
+            icon
+            name
           }
         }
         logo {

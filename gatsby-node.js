@@ -20,19 +20,18 @@ exports.createPages = ({ graphql, actions }) => {
                 }
                 features {
                   data {
-                    name
                     actionTaken
                     buttonText
                     event
+                    iconType
+                    icon
+                    name
                   }
                 }
                 logo {
                   url
                 }
                 logoHeight
-                page1
-                page2
-                page3
                 pages
                 primaryColor
                 publishableKey

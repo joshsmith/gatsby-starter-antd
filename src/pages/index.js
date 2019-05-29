@@ -33,7 +33,7 @@ const IndexPage = ({ data }) => (
             <Select
               showSearch
               style={{ width: '280px' }}
-              placeholder="Select a person"
+              placeholder="Select a customer"
               onChange={slug => navigate(slug)}
               optionFilterProp="children"
               filterOption={(input, option) =>
@@ -57,8 +57,8 @@ const IndexPage = ({ data }) => (
                     {faviconUrl && (
                       <img
                         src={faviconUrl}
+                        alt=""
                         width="16"
-                        height="16"
                         style={{ marginRight: '5px', verticalAlign: 'sub' }}
                       />
                     )}

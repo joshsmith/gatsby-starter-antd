@@ -77,12 +77,5 @@ module.exports = {
         path: `${__dirname}/src/data`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `user-images`,
-        path: `${__dirname}/src/images/users`,
-      },
-    },
   ],
 }

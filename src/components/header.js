@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import { Col, Icon, Row, Switch } from 'antd'
 import styled from '@emotion/styled'
 import { darken } from 'polished'
-import StyledButton from './StyledButton'
 import UserSelect from './UserSelect'
 
 const Menu = styled.ul`
@@ -70,15 +69,9 @@ const Header = ({
                 </Link>
               </MenuItem>,
             ])}
-          {userSelectVisible ? (
+          {userSelectVisible && (
             <li>
               <UserSelect primaryColor={primaryColor} />
-            </li>
-          ) : (
-            <li>
-              <StyledButton color={primaryColor} type="primary">
-                <Link to={`/${slug}`}>Sign up for {customer}</Link>
-              </StyledButton>
             </li>
           )}
           <li>
