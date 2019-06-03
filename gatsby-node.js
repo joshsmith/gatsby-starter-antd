@@ -43,6 +43,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `)
+    console.log(result)
     // For each path, create a page and decide which template to use.
     // values inside the context Object are available in the page's query
     result.data.allAirtable.edges.forEach(({ node }) => {
