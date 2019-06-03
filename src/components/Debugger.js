@@ -2,8 +2,12 @@
 import React, { Fragment, useState } from 'react'
 import { Badge, Button, Drawer, Icon } from 'antd'
 
-const Debugger = ({ issues }) => {
+const Debugger = ({ publishableKey }) => {
   const [drawerVisible, setDrawerVisible] = useState(null)
+
+  let issues = []
+  if (!publishableKey)
+    issues.push({ message: 'The publishable key was not set on Airtable.' })
 
   return (
     <Fragment>

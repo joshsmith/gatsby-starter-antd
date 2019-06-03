@@ -13,8 +13,10 @@ import snippet from '../data/snippet'
 
 const { Content } = AntLayout
 
-const Template = ({ data }) => {
-  const {
+const urlForFavicon = favicon => favicon && favicon.length > 0 && favicon[0].url
+
+const Template = ({
+  data: {
     airtable: {
       data: {
         customer,
@@ -29,12 +31,9 @@ const Template = ({ data }) => {
         uppercase,
       },
     },
-  } = data
-  const faviconUrl = favicon && favicon.length > 0 && favicon[0].url
-
-  let issues = []
-  if (!publishableKey)
-    issues.push({ message: 'The publishable key was not set on Airtable.' })
+  },
+}) => {
+  const faviconUrl = urlForFavicon(favicon)
 
   return (
     <Layout>
@@ -85,7 +84,7 @@ const Template = ({ data }) => {
         </Row>
         <Row>
           <Col span={24} style={{ textAlign: 'right' }}>
-            <Debugger issues={issues} />
+            <Debugger publishableKey={publishableKey} />
           </Col>
         </Row>
       </Content>
