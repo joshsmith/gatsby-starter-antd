@@ -26,6 +26,12 @@ const query = graphql`
   }
 `
 
+const avatarUrl = ({
+  childImageSharp: {
+    fluid: { src },
+  },
+}) => `https://sift-demos.netlify.com${src}`
+
 const UserSelect = ({ primaryColor }) => (
   <StaticQuery
     query={query}
@@ -47,9 +53,7 @@ const UserSelect = ({ primaryColor }) => (
           // Set the traits
           const traits = {
             name,
-            avatar: `https://sift-demos.netlify.com${
-              src.childImageSharp.fluid.src
-            }`,
+            avatar: avatarUrl(src),
           }
 
           if (Sift) {
