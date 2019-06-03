@@ -4,11 +4,11 @@ import { graphql } from 'gatsby'
 import { Col, Layout as AntLayout, Row, Skeleton } from 'antd'
 import Helmet from 'react-helmet'
 import Favicon from 'react-favicon'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Header from '../components/header'
 import Debugger from '../components/Debugger'
 import Feature from '../components/Feature'
+import SmileIcon from '../components/SmileIcon'
 import snippet from '../data/snippet'
 
 const { Content } = AntLayout
@@ -55,20 +55,12 @@ const Template = ({
         <Row gutter={16}>
           <Col span={24}>
             <Skeleton paragraph={{ rows: 3 }} />
-            <div style={{ margin: '2em 0', textAlign: 'center' }}>
-              <h2>
-                <FontAwesomeIcon
-                  icon={{ prefix: 'fas', iconName: 'comment-alt-smile' }}
-                  style={{
-                    color: primaryColor,
-                    fontSize: '1.25em',
-                    marginRight: 7,
-                    verticalAlign: 'middle',
-                  }}
-                />
-                Get feedback on {customer}'s features with Sift.
-              </h2>
-            </div>
+          </Col>
+          <Col span={24} style={{ margin: '2em 0', textAlign: 'center' }}>
+            <h2>
+              <SmileIcon color={primaryColor} />
+              Get feedback on {customer}'s features with Sift.
+            </h2>
           </Col>
           {features &&
             features.map(({ data }, index) => [
