@@ -1,12 +1,10 @@
 const path = require(`path`)
 
 exports.createPages = ({ graphql, actions }) => {
-  // createPage is a built in action,
-  // available to all gatsby-node exports
+  // createPage is a built in action, available to all `gatsby-node` exports
   const { createPage } = actions
   return new Promise(async resolve => {
-    // we need the table name (e.g. "Sections")
-    // as well as the unique path for each Page/Section.
+    // We need the table name and the unique path for each page
     const result = await graphql(`
       {
         allAirtable {
@@ -43,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `)
-    console.log(result)
+
     // For each path, create a page and decide which template to use.
     // values inside the context Object are available in the page's query
     result.data.allAirtable.edges.forEach(({ node }) => {
@@ -71,6 +69,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
       }
     })
+
     resolve()
   })
 }

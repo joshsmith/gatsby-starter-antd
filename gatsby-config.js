@@ -15,6 +15,10 @@ module.exports = {
             tableName: 'Demos',
             tableView: 'Published',
             tableLinks: ['features'],
+            defaultValues: {
+              publishableKey: '',
+              uppercase: false,
+            },
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
