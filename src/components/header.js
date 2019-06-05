@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import { Col, Icon, Row, Switch } from 'antd'
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { darken } from 'polished'
 import UserSelect from './UserSelect'
 

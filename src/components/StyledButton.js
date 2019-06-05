@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { darken, lighten } from 'polished'
 
 const StyledButton = styled(Button)`
