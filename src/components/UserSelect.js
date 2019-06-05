@@ -68,10 +68,8 @@ const UserSelect = ({ primaryColor }) => (
           }
         } else {
           if (Sift) {
-            // Logout the user if we can and identify the anonymouse user
-            // TODO: Add Sift.reset()
-            // Sift.reset()
-            // Sift.identify()
+            // Logout the user if we can and identify the anonymous user
+            Sift.reset()
             message.success(`Reset the identified user`)
           }
         }

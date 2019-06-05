@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import { Col, Icon, Row, Switch } from 'antd'
+import { message, Col, Icon, Row, Switch } from 'antd'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import UserSelect from './UserSelect'
@@ -78,7 +78,16 @@ const Header = ({
             <Switch
               checkedChildren={<Icon type="user" />}
               unCheckedChildren={<Icon type="question" />}
-              onChange={() => setUserSelectVisible(!userSelectVisible)}
+              onChange={() => {
+                if (userSelectVisible) {
+                  if (Sift) {
+                    // Logout the user if we can and identify the anonymous user
+                    Sift.reset()
+                    message.success(`Reset the identified user`)
+                  }
+                }
+                setUserSelectVisible(!userSelectVisible)
+              }}
             />
           </li>
         </Menu>
